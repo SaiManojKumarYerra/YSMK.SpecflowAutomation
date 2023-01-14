@@ -1,5 +1,6 @@
 ﻿Feature: OrangeHRM
 	Simple calculator for adding two numbers
+	Adding this line to checkin GIT
 
 @Login
 Scenario: Login to Orange HRM

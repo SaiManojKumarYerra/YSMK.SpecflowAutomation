@@ -43,9 +43,9 @@ namespace YSMK.SpecflowAutomation.AppHooks
 
 
             resultsPath = GenericHelpers.GetProjectPathOfFolder("TestReports");
-            Settings.LogPath = resultsPath + "\\LogFolder\\";
-            Settings.ReportPath = resultsPath + "\\ExtentReports\\";
-            ScreenshotPath = Settings.ReportPath + "\\Screenshots\\";
+            Settings.LogPath = resultsPath + @"\" + "LogFolder" + @"\";
+            Settings.ReportPath = resultsPath + @"\" + "ExtentReports" + @"\";
+            ScreenshotPath = Settings.ReportPath + @"\" + "Screenshots" + @"\";
 
             if (!Directory.Exists(Settings.LogPath))  Directory.CreateDirectory(Settings.LogPath);
             if (!Directory.Exists(Settings.ReportPath))  Directory.CreateDirectory(Settings.ReportPath);

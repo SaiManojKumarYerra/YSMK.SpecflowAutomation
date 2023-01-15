@@ -1,7 +1,6 @@
 ﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.Gherkin.Model;
 using AventStack.ExtentReports.Reporter;
-using AventStack.ExtentReports.Reporter.Configuration;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using System;
@@ -9,6 +8,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using TechTalk.SpecFlow;
+using YSMK.SpecflowAutomation.Base;
 using YSMK.SpecflowAutomation.Configuration;
 
 namespace YSMK.SpecflowAutomation.Utilities
@@ -103,14 +103,18 @@ namespace YSMK.SpecflowAutomation.Utilities
                     else if (stepType == "When") nodeTest = scenarioTest.CreateNode<When>(ScenarioStepContext.Current.StepInfo.Text);
                     else if (stepType == "And") nodeTest = scenarioTest.CreateNode<And>(ScenarioStepContext.Current.StepInfo.Text);
                     else if (stepType == "Then") nodeTest = scenarioTest.CreateNode<Then>(ScenarioStepContext.Current.StepInfo.Text);
-                }else if(scenarioContext.TestError != null)
+                    ReportHelpers.Log(LogStatus.PASS, "PASSSED");
+                }
+                else if(scenarioContext.TestError != null)
                 {
                     Exception ex = scenarioContext.TestError;
-                    if (stepType == "Given") nodeTest = scenarioTest.CreateNode<Given>(ScenarioStepContext.Current.StepInfo.Text);
+                    if (stepType == "Given")  nodeTest = scenarioTest.CreateNode<Given>(ScenarioStepContext.Current.StepInfo.Text);
                     else if (stepType == "When") nodeTest =  scenarioTest.CreateNode<When>(ScenarioStepContext.Current.StepInfo.Text);
                     else if (stepType == "And") nodeTest = scenarioTest.CreateNode<And>(ScenarioStepContext.Current.StepInfo.Text);
                     else if (stepType == "Then") nodeTest = scenarioTest.CreateNode<Then>(ScenarioStepContext.Current.StepInfo.Text);
-                }
+
+                        ReportHelpers.Log(LogStatus.FAIL, ex.InnerException.ToString());
+                    }
 
                 //if (TestResult.ToString() == "StepDefinitionPending")
                 //{
@@ -140,7 +144,7 @@ namespace YSMK.SpecflowAutomation.Utilities
                     nodeTest.Info(message);
                     break;
                 case LogStatus.PASS:
-                    nodeTest.Pass(message);
+                    nodeTest.Pass(message, AttachScreenShot().Build());
                     //nodeTest.Log(Status.Pass, message);
                     break;
                 case LogStatus.BOLD:
@@ -148,11 +152,11 @@ namespace YSMK.SpecflowAutomation.Utilities
                     //nodeTest.Log(Status.Pass, message);
                     break;
                 case LogStatus.FAIL:
-                    nodeTest.Fail(message);
+                    nodeTest.Fail(message, AttachScreenShot().Build());
                     //nodeTest.Log(Status.Fail, message);
                     break;
                 case LogStatus.EXCEPTION:
-                    nodeTest.Fatal(message);
+                    nodeTest.Fatal(message, AttachScreenShot().Build());
                     //nodeTest.Log(Status.Fatal, message);
                     break;
                 default:
@@ -179,6 +183,7 @@ namespace YSMK.SpecflowAutomation.Utilities
                     //extent.AddSystemInfo("Browser Version", ((RemoteWebDriver)driver).Capabilities.GetCapability("version").ToString());
                     extent.AddSystemInfo("Environment", Settings.Environment);
                     extent.AddSystemInfo("Computer Name", System.Environment.MachineName);
+                    extent.AddSystemInfo("Tester Name", "Sai Manoj Kumar");
                     extent.Flush();
                     //Send_Report_In_Mail();
 
@@ -188,6 +193,14 @@ namespace YSMK.SpecflowAutomation.Utilities
             {
                 LogHelpers.Write("ERROR :: " + e.Message, e.InnerException);
             }
+        }
+
+        public static MediaEntityBuilder AttachScreenShot()
+        {
+
+            String fileName = GenericHelpers.TakesScreenshot();
+            var screenShot = MediaEntityBuilder.CreateScreenCaptureFromPath(fileName);
+            return screenShot;
         }
     }
 }

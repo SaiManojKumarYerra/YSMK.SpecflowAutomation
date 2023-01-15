@@ -12,18 +12,18 @@ namespace YSMK.SpecflowAutomation.Pages
 {
     public class LoginPage : BasePage
     {
-
+        private IWebDriver driver;
         public LoginPage(ScenarioContext scenarioContext) : base(scenarioContext)
         {
-
+            driver = DriverContext.Driver;
         }
 
         #region Locators
-        private IWebElement userName => DriverContext.Driver.FindElement(By.XPath("//input[@placeholder='Username']"));
-        private IWebElement passWord => DriverContext.Driver.FindElement(By.XPath("//input[@placeholder='Password']"));
-        private IWebElement loginButton => DriverContext.Driver.FindElement(By.XPath("//button[normalize-space()='Login']"));
-        private IWebElement profileMenu => DriverContext.Driver.FindElement(By.XPath("//i[@class='oxd-icon bi-caret-down-fill oxd-userdropdown-icon']"));
-        private IWebElement logoutButton => DriverContext.Driver.FindElement(By.XPath("//a[normalize-space()='Logout']"));
+        private IWebElement userName => driver.FindElement(By.XPath("//input[@placeholder='Username']"));
+        private IWebElement passWord => driver.FindElement(By.XPath("//input[@placeholder='Password']"));
+        private IWebElement loginButton => driver.FindElement(By.XPath("//button[normalize-space()='Login']"));
+        private IWebElement profileMenu => driver.FindElement(By.XPath("//i[@class='oxd-icon bi-caret-down-fill oxd-userdropdown-icon']"));
+        private IWebElement logoutButton => driver.FindElement(By.XPath("//a[normalize-space()='Logout']"));
         #endregion
 
 

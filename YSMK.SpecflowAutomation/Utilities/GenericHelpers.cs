@@ -1,8 +1,11 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using YSMK.SpecflowAutomation.Base;
+using YSMK.SpecflowAutomation.Configuration;
 
 namespace YSMK.SpecflowAutomation.Utilities
 {
@@ -176,6 +179,13 @@ namespace YSMK.SpecflowAutomation.Utilities
         {
             var TimeAndDate = DateTime.Now.ToString("yyyyMMddHHmmss");
             return TimeAndDate;
+        }
+
+        public static string TakesScreenshot()
+        {
+            string fileName = Settings.ReportPath + @"\" + "Screenshots"+ @"\" + "AutomationScreenshot_" + DateTime.Now.ToString("ddMMYYYYHHmmss") + ".png";
+            ((ITakesScreenshot)DriverContext.Driver).GetScreenshot().SaveAsFile(fileName);
+            return fileName;
         }
     }
 }

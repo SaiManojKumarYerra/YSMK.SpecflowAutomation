@@ -31,6 +31,7 @@ namespace YSMK.SpecflowAutomation.StepDefinitions
            
             loginPage.LoginToApplication();
             ReportHelpers.Log(LogStatus.PASS, "Login to Application is successful");
+            WriteToSpecFlowOutputHelper("jklfd");
         }
         
         [Given(@"User enters UserId and Password")]

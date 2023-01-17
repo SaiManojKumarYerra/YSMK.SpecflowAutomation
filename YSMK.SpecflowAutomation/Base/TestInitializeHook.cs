@@ -9,13 +9,13 @@ namespace YSMK.SpecflowAutomation.Base
 {
     public abstract class TestInitializeHook : Steps
     {
-        public static void OpenBrowser(BrowserType browserType = BrowserType.FireFox)
+        public static void OpenBrowser(BrowserType browserType)
         {
             switch (browserType)
             {
                 case BrowserType.InternetExplorer:
                     DriverContext.Driver = new InternetExplorerDriver();
-                    DriverContext.Browser = new Browser(DriverContext.Driver);
+                   // DriverContext.Browser = new Browser(DriverContext.Driver);
                     break;
                 case BrowserType.FireFox:
                     //var binary = new FirefoxBinary(@"C:\Program Files (x86)\Mozilla Firefox\firefox.exe");
@@ -26,7 +26,7 @@ namespace YSMK.SpecflowAutomation.Base
                         AcceptInsecureCertificates = true
                     };
                     DriverContext.Driver = new FirefoxDriver(fireFoxOptions);
-                    DriverContext.Browser = new Browser(DriverContext.Driver);
+                    //DriverContext.Browser = new Browser(DriverContext.Driver);
                     break;
                 case BrowserType.Chrome:
                     ChromeOptions chromeOptions = new ChromeOptions();
@@ -37,7 +37,7 @@ namespace YSMK.SpecflowAutomation.Base
                     //chromeOptions.AddArguments("headless");
                     chromeOptions.AddArgument("--incognito");
                     DriverContext.Driver = new ChromeDriver(chromeOptions);
-                    DriverContext.Browser = new Browser(DriverContext.Driver);
+                    //DriverContext.Browser = new Browser(DriverContext.Driver);
                     break;
                 case BrowserType.WebService:
                     break;

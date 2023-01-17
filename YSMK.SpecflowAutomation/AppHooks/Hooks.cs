@@ -70,7 +70,7 @@ namespace YSMK.SpecflowAutomation.AppHooks
             LogHelpers.Write(_scenarioContext.ScenarioInfo.Title);
             ReportHelpers.CreateScenarioTest(_scenarioContext.ScenarioInfo.Title);
             _specFlowOutputHelper.WriteLine("Environment : " + Settings.Environment);
-            _specFlowOutputHelper.WriteLine("Browser : " + Enum.GetName(typeof(BrowserType), Settings.BrowserType));
+            _specFlowOutputHelper.WriteLine("Browser : " +  Settings.BrowserType);
             _specFlowOutputHelper.WriteLine("Scenario : " + _scenarioContext.ScenarioInfo.Title);
             LogHelpers.Write("***************************************************");
             OpenBrowser(Settings.BrowserType);

@@ -19,7 +19,5 @@ namespace YSMK.SpecflowAutomation.Base
             }
         }
 
-
-        public static Browser Browser { get; set; }
     }
 }
